@@ -9,13 +9,15 @@ if (isset($_POST['login'])) {
     $result = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
     $row = mysqli_fetch_assoc($result);
 
-    if ($row && password_verify($password, $row['password'])) {
-        $_SESSION['user'] = $row['email'];
-        header("Location: dashboard.php");
-        exit;
-    } else {
-        echo "<script>alert('Email atau password salah!');</script>";
-    }
+if ($row && password_verify($password, $row['password'])) {
+
+    $_SESSION['user_id'] = $row['id'];
+    $_SESSION['user_email'] = $row['email'];
+
+    header("Location: dashboard.php");
+    exit;
+}
+
 }
 ?>
 
