@@ -1,0 +1,181 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Manrope', sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.detail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  max-width: 1100px;
+  width: 90%;
+  margin: 40px auto;
+  align-items: center;
+}
+
+.detail-container img {
+  width: 100%;
+  max-width: 450px;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.detail-info h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1f1f1f;
+}
+
+.detail-info p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
+  text-align: justify;
+}
+
+.detail-info h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000;
+  margin-top: 10px;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 15px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.quantity-control button {
+  flex: 1;
+  height: 48px;
+  font-size: 22px;
+  font-weight: 600;
+  background-color: #3247d5;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.quantity-control button:hover {
+  background-color: #2234a3;
+}
+
+.quantity-control span {
+  flex: 1;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+  background-color: #fff;
+  line-height: 48px;
+}
+
+#cartForm {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.cart-btn,
+.buy-btn,
+.disabled-btn {
+  flex: 1;
+  padding: 14px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cart-btn {
+  background-color: transparent;
+  color: #3247d5;
+  border: 1.8px solid #3247d5;
+}
+
+.cart-btn:hover {
+  background-color: #3247d5;
+  color: #fff;
+}
+
+/* Buy Now */
+.buy-btn {
+  background-color: #3247d5;
+  color: #fff;
+  border: none;
+}
+
+.buy-btn:hover {
+  background-color: #2234a3;
+}
+
+/* Stok Habis */
+.disabled-btn {
+  background-color: #aaa;
+  color: #fff;
+  border: none;
+  cursor: not-allowed;
+  padding: 14px 0;
+  font-weight: 500;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+@media (max-width: 900px) {
+  .detail-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .detail-info {
+    align-items: center;
+  }
+
+  .detail-info p {
+    text-align: center;
+  }
+
+  #cartForm {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cart-btn,
+  .buy-btn,
+  .disabled-btn {
+    width: 100%;
+  }
+
+  .quantity-control {
+    max-width: 100%;
+  }
+}

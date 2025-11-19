@@ -1,0 +1,193 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #f8f8f8;
+}
+
+/* ================= HERO SECTION ================= */
+.hero {
+  position: relative;
+  height: 650px;
+  background: url('hero.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* TEKS DI HERO */
+.hero-text {
+  max-width: 450px;
+  margin-top: 80px;
+  text-align: left;
+}
+
+.hero-text h1 {
+  font-size: 52px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  font-size: 16px;
+  color: #f0f0f0;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* SUPAYA SECTION BAWAH TURUN DAN GA NUBRUK */
+section.py-5 {
+  margin-top: 120px;
+}
+
+/* ================= BUTTON ================= */
+.btn-primary {
+  background: #ffffff;
+  color: rgb(44, 68, 152);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #0d47a1;
+  color: white;
+}
+
+.btn-p {
+  background: #1565c0;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.btn-p:hover {
+  background: #193560;
+  color: rgb(249, 249, 250);
+}
+
+label {
+  font-weight: 600;
+}
+
+/* ================= DONATION CARD ================= */
+.donation-card {
+  position: absolute;
+  bottom: -250px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #000;
+  width: 500px;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.amount {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.progress-container {
+  background: #e0e0e0;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  background: #00a8e8;
+  height: 100%;
+  width: 60%;
+  border-radius: 5px;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #555;
+}
+
+/* ================= FORM DONATION IN MODAL ================= */
+
+#donasiModal .form-control,
+#donasiModal input,
+#donasiModal select,
+#donasiModal textarea {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+#donasiModal label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+#donasiModal .modal-content {
+  border-radius: 15px;
+  padding: 10px 15px;
+}
+
+#donasiModal .modal-title {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+#donasiModal button[type="submit"] {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .hero {
+    height: 500px;
+  }
+
+  .hero-text h1 {
+    font-size: 36px;
+  }
+
+  .donation-card {
+    width: 90%;
+    padding: 20px;
+  }
+}

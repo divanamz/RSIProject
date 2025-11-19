@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: url('bg.png') no-repeat center center/cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  width: 850px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.image-side {
+  flex: 1;
+}
+
+.image-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.form-side {
+  flex: 1;
+  padding: 40px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-side h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.form-side p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+form label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+form input {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 6px 0 16px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  outline: none;
+  transition: 0.3s;
+}
+
+form input:focus {
+  border-color: #1d4ed8;
+}
+
+/* Link lupa password */
+.forgot {
+  text-align: right;
+  margin-bottom: 16px;
+}
+
+.forgot a {
+  font-size: 13px;
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+.forgot a:hover {
+  text-decoration: underline;
+}
+
+/* Tombol */
+.login-btn,
+.register-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.login-btn {
+  background: linear-gradient(90deg, #1041a0, #1041a0);
+  color: white;
+  margin-bottom: 10px;
+}
+
+.login-btn:hover {
+  opacity: 0.9;
+}
+
+.register-btn {
+  background: transparent;
+  color: #1e3a8a;
+  border: 1px solid #1e3a8a;
+}
+
+.register-btn:hover {
+  background-color: #1e3a8a;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .login-card {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .image-side img {
+    border-radius: 0;
+    height: 250px;
+  }
+}
