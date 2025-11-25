@@ -22,7 +22,10 @@ body {
 
 .hero-overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.4);
 }
 
@@ -141,36 +144,67 @@ label {
   color: #555;
 }
 
-/* ================= FORM DONATION IN MODAL ================= */
+/* ============================
+   FIX FORM DONASI (FINAL)
+   ============================ */
 
+/* Hilangkan margin bawaan yang bikin kolom tidak rata */
 #donasiModal .form-control,
-#donasiModal input,
+#donasiModal select {
+  margin-bottom: 0 !important;
+}
+
+/* Gunakan spacing Bootstrap saja */
+#donasiModal .row > div {
+  margin-bottom: 16px;
+}
+
+/* Samakan tinggi seluruh input */
+#donasiModal .form-control,
 #donasiModal select,
-#donasiModal textarea {
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 12px;
+#donasiModal .input-group-text {
+  height: 48px !important;
+  display: flex;
+  align-items: center;
   font-size: 15px;
 }
 
+/* Input-group untuk phone & amount */
+#donasiModal .input-group .form-control {
+  height: 48px !important;
+}
+
+#donasiModal .input-group-text {
+  font-weight: 600;
+}
+
+/* Styling tombol donasi */
+#donasiModal .btn-primary {
+  height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+/* Tambahan agar label rapi */
 #donasiModal label {
   font-weight: 600;
   margin-bottom: 6px;
-  display: block;
 }
 
-#donasiModal .modal-content {
-  border-radius: 15px;
-  padding: 10px 15px;
+/* Modal header biar lebih profesional */
+#donasiModal .modal-header {
+  border-bottom: 0;
+  padding-bottom: 0;
 }
 
-#donasiModal .modal-title {
-  font-weight: 700;
-  font-size: 20px;
+/* Modal footer rapi */
+#donasiModal .modal-footer {
+  border-top: 0;
+  padding-top: 0;
 }
 
-#donasiModal button[type="submit"] {
+#donasiModal button[type='submit'] {
   padding: 12px;
   font-size: 16px;
   border-radius: 8px;
