@@ -1,63 +1,71 @@
 <?php
 $pageTitle = "Donasi";
 include 'db.php';
-include '..\header.php';
 
 // ====== Hanya untuk POST insert donasi ======
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['action'])) {
 
-    header("Content-Type: application/json; charset=UTF-8");
+  header("Content-Type: application/json; charset=UTF-8");
 
-    $firstname = $_POST['firstname'] ?? '';
-    $lastname  = $_POST['lastname'] ?? '';
-    $email     = $_POST['email'] ?? '';
-    $country   = $_POST['country'] ?? '';
-    $phone     = $_POST['phone'] ?: null;
-    $amount    = $_POST['donation_amount'] ?? '0';
-    $method    = $_POST['payment_method'] ?? '';
-    $anon      = isset($_POST['anonymous_donation']) ? 1 : 0;
+  $firstname = $_POST['firstname'] ?? '';
+  $lastname = $_POST['lastname'] ?? '';
+  $email = $_POST['email'] ?? '';
+  $country = $_POST['country'] ?? '';
+  $phone = $_POST['phone'] ?: null;
+  $amount = $_POST['donation_amount'] ?? '0';
+  $method = $_POST['payment_method'] ?? '';
+  $anon = isset($_POST['anonymous_donation']) ? 1 : 0;
 
-    // Pastikan kolom anonymous_donation sudah ada di tabel
-    $query = $conn->prepare("
+  // Pastikan kolom anonymous_donation sudah ada di tabel
+  $query = $conn->prepare("
         INSERT INTO donasi 
         (firstname, lastname, email, country, phone, donation_amount, payment_method, anonymous_donation, status) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending')
     ");
 
-    if (!$query) {
-        echo json_encode(["status" => "fail", "error" => $conn->error]);
-        exit;
-    }
-
-    $query->bind_param("sssssisi", 
-        $firstname, 
-        $lastname, 
-        $email, 
-        $country, 
-        $phone, 
-        $amount, 
-        $method,
-        $anon
-    );
-
-    if ($query->execute()) {
-        echo json_encode(["status" => "success"]);
-    } else {
-        echo json_encode(["status" => "fail", "error" => $query->error]);
-    }
+  if (!$query) {
+    echo json_encode(["status" => "fail", "error" => $conn->error]);
     exit;
+  }
+
+  $query->bind_param(
+    "sssssisi",
+    $firstname,
+    $lastname,
+    $email,
+    $country,
+    $phone,
+    $amount,
+    $method,
+    $anon
+  );
+
+  if ($query->execute()) {
+
+    echo json_encode([
+      "status" => "success",
+      "donasi_id" => $conn->insert_id  // WAJIB dikirim
+    ]);
+  } else {
+    echo json_encode(["status" => "fail", "error" => $query->error]);
+  }
+  exit;
+  include '../header.php';
+
 }
 
 // ===== Hanya GET → tampil halaman HTML ======
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Donasi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Donasi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- ==================== HERO SECTION ==================== -->
@@ -65,23 +73,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['action'])) {
     <div class="overlay"></div>
     <div class="hero-container">
       <div class="hero-text">
-        <h1>LOREMIPSUM</h1>
+        <h1>Harapan Baru</h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Proin maximus justo neque, ac scelerisque urna lobortis et.
+          Mari bersama-sama memberikan bantuan darurat kepada mereka yang membutuhkan.Donasi Anda saat ini juga akan
+          menyediakan makanan, air bersih, dan tempat tinggal sementara.
         </p>
         <button id="donateBtn" class="btn-primary">Donate Now</button>
       </div>
 
       <div class="donation-card">
-        <p class="amount">Rp. XXX.XXX</p>
+        <p class="amount">Rp. 50.000.000</p>
         <div class="progress-container">
           <div class="progress">
             <div class="progress-bar" style="width: 60%;"></div>
           </div>
         </div>
         <div class="card-bottom">
-          <span>xxx investor</span>
+          <span>1987 investor</span>
           <span>60%</span>
         </div>
       </div>
@@ -93,8 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['action'])) {
     <div class="container">
       <div class="row justify-content-center align-items-center">
         <div class="col-md-6">
-          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-               class="img-fluid rounded" alt="Donasi" />
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" class="img-fluid rounded"
+            alt="Donasi" />
         </div>
         <div class="col-md-6">
           <h3 class="fw-bold">Your Donation is Really Powerful!</h3>
@@ -109,51 +117,75 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['action'])) {
 
   <!-- ==================== COMMUNITY SECTION ==================== -->
   <section class="community text-center py-3 bg-light">
-  <div class="container">
-    <h4 class="fw-semibold mb-2">Be The Part of Fundraisers With Over</h4>
-    <h2 class="fw-bold display-6 mb-2">52K,+&nbsp;&nbsp;52K,+&nbsp;&nbsp;52K,+</h2>
-    <p class="fw-medium mb-4">People From Around The World Joined</p>
+    <div class="container">
+      <h4 class="fw-semibold mb-2">Be The Part of Fundraisers With Over</h4>
+      <h2 class="fw-bold display-6 mb-2">52K,+&nbsp;&nbsp;52K,+&nbsp;&nbsp;52K,+</h2>
+      <p class="fw-medium mb-4">People From Around The World Joined</p>
 
-    <button id="donateBtn2" class="btn btn-p mb-4 px-4 py-2">Donate Now</button>
+      <button id="donateBtn2" class="btn btn-p mb-5 px-4 py-2">Donate Now</button>
 
-    <!-- Gallery grid -->
-   <div class="gallery">
-  <div class="row g-3 justify-content-center">
-<div class="row g-3 justify-content-between mt-2">
+      <!-- Gallery grid -->
+      <div class="gallery">
+        <div class="row g-3 justify-content-center">
+          <!-- ========== BARIS 3 : Hanya 2 Foto Kanan - Kiri ========== -->
+          <div class="row g-3 justify-content-between mt-2">
 
-  <!-- Foto kiri -->
-  <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-    <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
-  </div>
+            <!-- Foto kiri -->
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+              <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+            </div>
 
-  <!-- Foto kanan -->
-  <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-    <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
-  </div>
+            <!-- Foto kanan -->
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+              <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+            </div>
 
-</div>
+          </div>
 
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-      <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-      <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-      <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-      <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-      <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
-    </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-      <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
-    </div>
-</div>
+          <!-- ========== BARIS 1 ========== -->
+          <div class="col-6 col-md-3 col-lg-2">
+            <img src="gallery.jpg" class="gallery-img img-fluid" alt="">
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+          </div>
 
-</section>
+          <!-- ========== BARIS 2 (copy saja baris 1) ========== -->
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+          </div>
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <img src="gallery.jpg" class="img-fluid rounded-4 shadow-sm" alt="Gallery image">
+          </div>
+
+        </div>
+      </div>
+
+  </section>
 
   <!-- ==================== FOOTER ==================== -->
   <footer class="text-center py-4 bg-dark text-white">
@@ -183,26 +215,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['action'])) {
               <input type="text" class="form-control" name="lastname" placeholder="Last Name" required />
             </div>
             <div class="col-md-12">
-            <label>Email</label>
-            <input type="email" class="form-control" name="email" placeholder="Email" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"title="Please enter a valid email address (must contain @ and domain)" />
+              <label>Email</label>
+              <input type="email" class="form-control" name="email" placeholder="Email" required
+                pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                title="Please enter a valid email address (must contain @ and domain)" />
             </div>
             <div class="col-md-6">
               <label>Country</label>
               <input type="text" class="form-control" name="country" placeholder="Country" required />
             </div>
             <div class="col-md-6">
-            <label>Phone</label>
-            <div class="input-group">
-            <span class="input-group-text">+62</span>
-            <input type="text" class="form-control" name="phone" id="phone" placeholder="81234567890" required pattern="[0-9]{9,15}" title="Enter numbers only (9-15 digits)"oninput="this.value=this.value.replace(/[^0-9]/g,'');"/>
-            </div>
+              <label>Phone</label>
+              <div class="input-group">
+                <span class="input-group-text">+62</span>
+                <input type="text" class="form-control" name="phone" id="phone" placeholder="81234567890" required
+                  pattern="[0-9]{9,15}" title="Enter numbers only (9-15 digits)"
+                  oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
+              </div>
             </div>
             <div class="col-md-12">
-            <label>Donation amount*</label>
-            <div class="input-group">
-            <span class="input-group-text">Rp.</span>
-            <input type="text" class="form-control" name="donation_amount" id="donation_amount"placeholder="0"required oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
-            </div>
+              <label>Donation amount*</label>
+              <div class="input-group">
+                <span class="input-group-text">Rp.</span>
+                <input type="text" class="form-control" name="donation_amount" id="donation_amount" placeholder="0"
+                  required oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
+              </div>
             </div>
             <div class="col-md-12">
               <label>Payment Method*</label>
@@ -211,18 +248,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['action'])) {
               </select>
             </div>
             <div class="col-md-12 mt-3">
-  <div class="form-check">
-    <input 
-      class="form-check-input" 
-      type="checkbox" 
-      id="anonymous_donation" 
-      name="anonymous_donation"
-    >
-    <label class="form-check-label" for="anonymous_donation">
-      I would like to donate anonymously.
-    </label>
-  </div>
-</div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="anonymous_donation" name="anonymous_donation">
+                <label class="form-check-label" for="anonymous_donation">
+                  I would like to donate anonymously.
+                </label>
+              </div>
+            </div>
 
           </div>
 
@@ -236,20 +268,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['action'])) {
     </div>
   </div>
 
-<div class="modal fade" id="qrisModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content p-4 text-center border-0 shadow-lg">
-      <h4 class="fw-bold mb-2">Scan QRIS</h4>
-      <img src="gambar_qris.jpg" class="img-fluid rounded mb-3">
-      <button class="btn btn-primary" data-bs-dismiss="modal">Selesai</button>
+  <div class="modal fade" id="qrisModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-4 text-center border-0 shadow-lg">
+        <h4 class="fw-bold mb-2">Scan QRIS</h4>
+        <img src="gambar_qris.jpg" class="img-fluid rounded mb-3">
+        <button class="btn btn-primary" data-bs-dismiss="modal">Selesai</button>
+      </div>
     </div>
   </div>
-</div>
 
 
   <!-- ==================== JS ==================== -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/projectRSI/donasi/donasi.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/projectRSI/donasi/donasi.js"></script>
 
 </body>
+
 </html>
