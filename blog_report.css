@@ -1,0 +1,68 @@
+/* === Container mirip form-container === */
+.report-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* === Header mirip form-header === */
+.report-header {
+    display: flex;
+    align-items: center;
+}
+
+.report-header h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* === Form group mirip form-group === */
+.report-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.report-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    min-height: 180px;
+    resize: vertical;
+}
+
+/* === Actions mirip form-actions === */
+.report-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.report-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* === Tombol Cancel mirip cancel-btn === */
+.cancel-report-btn {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* === Tombol Submit mirip upload-btn === */
+.submit-report-btn {
+    background-color: #007bff;
+    color: white;
+}
